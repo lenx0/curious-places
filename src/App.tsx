@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 
@@ -10,8 +10,9 @@ const App: React.FC = () => {
   const intervalTime = 7000;
   const eraserActiveTime = 700;
   let sliderInterval: number;
+  const [isPaused, setIsPaused] = useState(false)
 
-  const changeSlide = (direction: 'next' | 'prev') => {
+  const changeSlide = (direction: 'next' | 'prev' | 'pause') => {
     const eraser = eraserRef.current;
     const slides = slidesRef.current?.querySelectorAll('.slide');
     if (!eraser || !slides) return;
@@ -36,33 +37,56 @@ const App: React.FC = () => {
     }, eraserActiveTime);
   };
 
+  const handlePauseClick = () => {
+    if(isPaused) {
+      setIsPaused(false)
+    } else {
+      setIsPaused(true)
+    }
+  }
+
   useEffect(() => {
-    sliderInterval = window.setInterval(() => changeSlide('next'), intervalTime);
-
-    const nextButton = nextRef.current;
-    const prevButton = prevRef.current;
-
-    const handleNextClick = () => {
-      changeSlide('next');
-      clearInterval(sliderInterval);
+    if(isPaused === true) {
+      const nextButton = nextRef.current;
+      const prevButton = prevRef.current;
+      const handleNextClick = () => {
+        changeSlide('next');
+      };
+  
+      const handlePrevClick = () => {
+        changeSlide('prev');
+      };
+      nextButton?.addEventListener('click', handleNextClick);
+      prevButton?.addEventListener('click', handlePrevClick);
+    } else {
       sliderInterval = window.setInterval(() => changeSlide('next'), intervalTime);
-    };
 
-    const handlePrevClick = () => {
-      changeSlide('prev');
-      clearInterval(sliderInterval);
-      sliderInterval = window.setInterval(() => changeSlide('next'), intervalTime);
-    };
-
-    nextButton?.addEventListener('click', handleNextClick);
-    prevButton?.addEventListener('click', handlePrevClick);
-
-    return () => {
-      nextButton?.removeEventListener('click', handleNextClick);
-      prevButton?.removeEventListener('click', handlePrevClick);
-      clearInterval(sliderInterval);
-    };
-  }, []);
+      const nextButton = nextRef.current;
+      const prevButton = prevRef.current;
+  
+      const handleNextClick = () => {
+        changeSlide('next');
+        clearInterval(sliderInterval);
+        sliderInterval = window.setInterval(() => changeSlide('next'), intervalTime);
+      };
+  
+      const handlePrevClick = () => {
+        changeSlide('prev');
+        clearInterval(sliderInterval);
+        sliderInterval = window.setInterval(() => changeSlide('next'), intervalTime);
+      };
+  
+      nextButton?.addEventListener('click', handleNextClick);
+      prevButton?.addEventListener('click', handlePrevClick);
+  
+      return () => {
+        nextButton?.removeEventListener('click', handleNextClick);
+        prevButton?.removeEventListener('click', handlePrevClick);
+        clearInterval(sliderInterval);
+      };
+    }
+    
+  }, [isPaused, handlePauseClick]);
 
   const slides = [
     {
@@ -102,6 +126,7 @@ const App: React.FC = () => {
         <div className="eraser" ref={eraserRef}></div>
         <div className="buttons-container">
           <button id="previous" ref={prevRef}><i className="fa fa-arrow-left"></i></button>
+          <button id="pause" onClick={handlePauseClick}><i className={`fa ${isPaused ? 'fa-play' : 'fa-pause'}`}></i></button>
           <button id="next" ref={nextRef}><i className="fa fa-arrow-right"></i></button>
         </div>
       </div>
