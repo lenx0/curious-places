@@ -104,6 +104,21 @@ const App: React.FC = () => {
       title: 'Nazca Lines',
       description: 'Linhas de Nasca ou Nazca são um grupo de grandes geoglifos feitos no solo do deserto de Sechura no sul do Peru. Eles foram criados pela cultura nasca entre os anos 500 a.C. e 500 d.C. por pessoas fazendo depressões ou incisões rasas no solo do deserto, removendo seixos e deixando pó de cores diferentes exposto.',
     },
+    {
+      image: "url('https://images.unsplash.com/photo-1605235904827-2fc511a86dd0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+      title: 'Uluru',
+      description: 'Uluru, também chamado de "umbigo do mundo", fica na Austrália. O local é considerado sagrado para os aborígenes Anangu, que são os guardiões da formação rochosa.',
+    },
+    {
+      image: "url('https://images.unsplash.com/photo-1553616393-16c0d9842e09?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+      title: 'Chocolate Hills',
+      description: `As colinas do Chocolate se localizam na ilha Bohol, nas Filipinas. São 1.268 montanhas em formas cônicas com tamanhos parecidos que ocupam uma área de 50 km².).`
+    },
+    {
+      image: "url('https://cdn.theatlantic.com/media/img/photo/2015/03/aoshima-japans-cat-island/c02_RTR4RUGR/main_1500.jpg')",
+      title: 'Cat island - Aoshima',
+      description: `Aoshima, também conhecida como Ilha dos Gatos, é uma ilha na província de Ehime, no Japão, conhecida por seu grande número de residentes felinos e pequeno número de residentes humanos. Os meios de comunicação relataram que os felinos superam os humanos em proporção entre eles, mas à medida que os habitantes idosos da ilha morreram, a proporção aumentou muito para quase 36:1. Os felinos foram introduzidos para combater roedores em barcos de pesca, mas permaneceram na ilha e se reproduziram em grande número.).`
+    },
   ];
 
   return (
@@ -137,8 +152,8 @@ const App: React.FC = () => {
         <p>
           Desenvolvido por
           <a target="_blank" rel="noopener noreferrer" href=" https://myportfolio-phi-ruddy.vercel.app/"> Thiago Beraldo </a>
-          - Veja como eu desenvolvi isso:
-          <a target="_blank" rel="noopener noreferrer" href="https://github.com/lenx0/curious-places"> Acessar</a>
+          - Repositório do site:
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/lenx0/curious-places"> Github</a>
         </p>
       </footer>
     </>
